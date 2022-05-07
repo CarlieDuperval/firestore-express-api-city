@@ -5,6 +5,7 @@ export const addCity = async (req, res) => {
     res.status(401).send("Invalid request");
     return;
   }
+
   const db = connectDb();
 
   const newCity = {
@@ -20,20 +21,18 @@ export const addCity = async (req, res) => {
   }
 };
 
-
 export const getAllCities = async (req, res) => {
-    const db = connectDb();
-  
-    try {
-      const snapshot = await db.collection("cities").get();
-      const citiesArray = snapshot.docs.map((doc) => {
-        let city = doc.data();
-        city.id = doc.id;
-        return city;
-      });
-      res.send(citiesArray);
-    } catch (error) {
-      res.status(500).send(error);
-    }
-  };
-  
+  const db = connectDb();
+
+  try {
+    const snapshot = await db.collection("cities").get();
+    const citiesArray = snapshot.docs.map((doc) => {
+      let city = doc.data();
+      city.id = doc.id;
+      return city;
+    });
+    res.send(citiesArray);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};

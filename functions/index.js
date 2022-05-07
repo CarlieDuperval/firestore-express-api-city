@@ -1,46 +1,16 @@
-import functions from 'firebase-functions'
-import express from 'express';
+import functions from "firebase-functions";
+import express from "express";
 
-
-import { addCity, getAllCities } from './getCities'
-
+import { addCity, getAllCities } from "./getCities.js";
 
 const app = express();
 app.use(express.json());
 
+// routes
+app.get("/cities", getAllCities);
 
-// routes 
+app.post("/cities", addCity);
 
-
-app.get('/cities', getAllCities)
-
-app.post('/cities', addCity)
-
-
-export const api = functions.https.onRequest(app)
+export const api = functions.https.onRequest(app);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//const functions = require("firebase-functions");
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//   functions.logger.info("Hello logs!", {structuredData: true});
-//   response.send("Hello from Firebase!");
-// });
